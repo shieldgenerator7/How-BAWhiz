@@ -24,7 +24,10 @@ public class InventoryManager : MonoBehaviour {
 
     public  void addItem(GameObject item)
     {
-        items.Add(item);
+        if (!items.Contains(item))
+        {
+            items.Add(item);
+        }
         Bounds bounds = spriteRer.bounds;
         float posx = nextX;
         float posy = transform.position.y;

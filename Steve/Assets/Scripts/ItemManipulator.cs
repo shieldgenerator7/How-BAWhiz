@@ -7,11 +7,12 @@ public class ItemManipulator : MonoBehaviour {
 
     private bool inInventory = false;
     private bool inHand = false;
+    private Vector2 origMousePosition;
 
 	// Use this for initialization
 	void Start () {
-        Canvas.
-        DropTargetListKeeper spawnList = GameObject.FindGameObjectWithTag("SpawnPointList").GetComponent<DropTargetListKeeper>();
+        ItemSpawner spawnList = GameObject.FindGameObjectWithTag("SpawnPointList").GetComponent<ItemSpawner>();
+        transform.position = spawnList.getRandomPosition();
 	}
 	
 	// Update is called once per frame
@@ -21,15 +22,17 @@ public class ItemManipulator : MonoBehaviour {
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             if (collides(this.gameObject, mousePosition))
             {
-                if (!inInventory)
-                {
-                    inInventory = true;
-                    inventoryBox.GetComponent<InventoryManager>().addItem(this.gameObject);
-                }
-                else
-                {
-                    inHand = true;
-                }
+                inHand = true;
+                origMousePosition = mousePosition;
+                //if (!inInventory)
+                //{
+                //    inInventory = true;
+                //    inventoryBox.GetComponent<InventoryManager>().addItem(this.gameObject);
+                //}
+                //else
+                //{
+                //    inHand = true;
+                //}
             }
         }
         else if (Input.GetMouseButtonUp(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended))
@@ -39,19 +42,27 @@ public class ItemManipulator : MonoBehaviour {
             {
                 if (inHand)
                 {
-                    GameObject target = inventoryBox.GetComponent<InventoryManager>().dropList.GetComponent<DropTargetListKeeper>().canDropHere(mousePosition);
-                    if (target != null)
-                    {
-                        target.GetComponent<DropTarget>().accept(this.gameObject);
-                        inHand = false;
-                        inInventory = false;
-                        inventoryBox.GetComponent<InventoryManager>().removeItem(this.gameObject);
-                    }
-                    else
+                    if (Vector2.Distance(origMousePosition, mousePosition) < 0.5f)
                     {
                         inHand = false;
-                        inventoryBox.GetComponent<InventoryManager>().organizeItems();
+                        inventoryBox.GetComponent<InventoryManager>().addItem(this.gameObject);
                         inInventory = true;
+                    }
+                    else { 
+                        GameObject target = inventoryBox.GetComponent<InventoryManager>().dropList.GetComponent<DropTargetListKeeper>().canDropHere(mousePosition);
+                        if (target != null)
+                        {
+                            target.GetComponent<DropTarget>().accept(this.gameObject);
+                            inHand = false;
+                            inInventory = false;
+                            inventoryBox.GetComponent<InventoryManager>().removeItem(this.gameObject);
+                        }
+                        else
+                        {
+                            inHand = false;
+                            inventoryBox.GetComponent<InventoryManager>().addItem(this.gameObject);
+                            inInventory = true;
+                        }
                     }
                 }
                 //GetComponent<SpriteRenderer>().flipX = ! GetComponent<SpriteRenderer>().flipX;

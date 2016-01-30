@@ -4,7 +4,7 @@ using System.Collections;
 public class DropTargetListKeeper : MonoBehaviour {
 
 
-    private ArrayList places = new ArrayList();
+    public ArrayList places = new ArrayList();
 
     // Use this for initialization
     void Start () {
