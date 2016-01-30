@@ -1,0 +1,105 @@
+fileFormatVersion: 2
+guid: 408142111d0cddb49be890a7d46a6cad
+timeCreated: 1454135927
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: cdoor1_sprite_0
+    21300002: cdoor1_sprite_1
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: cdoor1_sprite_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 53
+        width: 130
+        height: 331
+      alignment: 9
+      pivot: {x: 0.038540006, y: 0.018957224}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 120.9898, y: 299.72516}
+        - {x: 115.9898, y: 305.72516}
+        - {x: 83.9898, y: 314.72516}
+        - {x: 17.9898, y: 324.72516}
+        - {x: -5.0102005, y: 324.72516}
+        - {x: -5.0102005, y: 161.72516}
+        - {x: -3.0102005, y: 133.72516}
+        - {x: -5.0102005, y: 65.72516}
+        - {x: -5.0102005, y: -4.2748413}
+        - {x: -3.0102005, y: -6.2748413}
+        - {x: 11.9897995, y: -6.2748413}
+        - {x: 106.9898, y: 16.725159}
+        - {x: 119.9898, y: 25.725159}
+        - {x: 124.9898, y: 51.72516}
+        - {x: 124.9898, y: 244.72516}
+    - name: cdoor1_sprite_1
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 0
+        width: 42
+        height: 385
+      alignment: 9
+      pivot: {x: 0.95386213, y: 0.50000006}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -31.06221, y: 192.49997}
+        - {x: -33.06221, y: 191.49997}
+        - {x: -40.06221, y: 95.49997}
+        - {x: -40.06221, y: -62.50003}
+        - {x: -33.06221, y: -192.50003}
+        - {x: -17.06221, y: -192.50003}
+        - {x: 1.9377899, y: -174.50003}
+        - {x: 1.9377899, y: 174.49997}
+        - {x: -17.06221, y: 192.49997}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
