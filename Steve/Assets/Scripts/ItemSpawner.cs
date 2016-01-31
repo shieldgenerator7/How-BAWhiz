@@ -17,11 +17,11 @@ public class ItemSpawner : MonoBehaviour {
 	
 	}
 
-    public Vector3 getRandomPosition()
+    public GameObject getRandomLocation()
     {
         int index = Random.Range(0, placesLeft.Count - 1);
-        Vector3 pos = ((GameObject)placesLeft[index]).transform.position;
+        GameObject loc = (GameObject)placesLeft[index];
         placesLeft.RemoveAt(index);
-        return pos;
+        return loc;
     }
 }

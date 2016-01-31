@@ -5,6 +5,10 @@ public class DropTarget : MonoBehaviour {
 
     public bool isSpawnPoint = true;
     public bool isDropTarget = true;
+    public string itemRequirement1;
+    public string itemRequirement2;
+
+    ArrayList items = new ArrayList();
 
     private GameObject spawnPoint;
     private GameObject dropList;
@@ -36,6 +40,62 @@ public class DropTarget : MonoBehaviour {
     public void accept(GameObject item)
     {
         item.transform.position = this.transform.position;
+        items.Add(item);
+        if (itemRequirement1 != null || itemRequirement2 != null)
+        {
+            checkItems();
+        }
+    }
+    public void removeItem(GameObject item)
+    {
+        items.Remove(item);
+    }
+    private void checkItems()
+    {
+        bool fulfill1 = false;
+        if (itemRequirement1 != null)
+        {
+            foreach (GameObject item in items)
+            {
+                if (item.tag.Equals(itemRequirement1))
+                {
+                    fulfill1 = true;
+                    break;//as long as one fulfills it, it's a go
+                }
+            }
+        }
+        else
+        {
+            fulfill1 = true;
+        }
+
+        bool fulfill2 = false;
+        if (itemRequirement2 != null)
+        {
+            foreach (GameObject item in items)
+            {
+                if (item.tag.Equals(itemRequirement2))
+                {
+                    fulfill2 = true;
+                    break;//as long as one fulfills it, it's a go
+                }
+            }
+        }
+        else
+        {
+            fulfill2 = true;
+        }
+
+        if (fulfill1 && fulfill2)
+        {
+            craftObject();
+        }
+
+    }
+    private void craftObject()
+    {
+        GetComponent<ItemCrafter>().craftItem(items);
+        items = new ArrayList();
     }
     public bool collides(Vector2 pos)
     {
