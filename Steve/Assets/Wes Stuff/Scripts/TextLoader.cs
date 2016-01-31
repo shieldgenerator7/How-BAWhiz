@@ -27,7 +27,7 @@ public class TextLoader : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        string textStream = System.IO.File.ReadAllText("Assets\\Assets\\Wes Stuff\\Documents\\Intro Dialogue.txt");
+        string textStream = System.IO.File.ReadAllText("Assets\\Wes Stuff\\Documents\\Intro Dialogue.txt");
         string[] lines = textStream.Split('\n');
         foreach(string line in lines)
         {
