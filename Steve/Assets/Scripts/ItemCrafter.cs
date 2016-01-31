@@ -13,7 +13,7 @@ public class ItemCrafter : MonoBehaviour {
 	// Update is called once per frame
 	void Update() { 
 	}
-    public void craftItem(ArrayList items, GameObject baseItem, GameObject catalyst)
+    public void craftItem(ArrayList items, GameObject baseItem, GameObject catalyst, bool advanceScene)
     {
         GameObject result = null;
         //foreach(GameObject item in items)
@@ -42,11 +42,18 @@ public class ItemCrafter : MonoBehaviour {
             }
         }
         //}
-        if (result.tag.Equals("item_wand"))
+        if (advanceScene)
         {
-            result.transform.position = new Vector3(0, 0);
-            result.GetComponent<ItemManipulator>().alwaysInHand = true;
-            Cursor.visible = false;
+            if (result.tag.Equals("item_wand"))
+            {
+                result.transform.position = new Vector3(0, 0);
+                result.GetComponent<ItemManipulator>().alwaysInHand = true;
+                Cursor.visible = false;
+            }
+            else
+            {
+                result.transform.position = ((GameObject)items[0]).transform.position;
+            }
             result.GetComponent<PhysicalComponent>().activateNextScene();
         }
         else
