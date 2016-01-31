@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 
 public class Rune : MonoBehaviour
 {
-    public GameObject Prefab;
+    public Rune Prefab;
 
     public RuneSlot Slot;
     public RuneInventory Inventory;

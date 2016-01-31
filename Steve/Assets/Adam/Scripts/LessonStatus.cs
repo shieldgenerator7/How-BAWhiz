@@ -21,21 +21,6 @@ public class LessonStatus : MonoBehaviour
         SomaticStatus.Show();
 	}
 
-    private void populateSomatic()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    private void populateVerbal()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    private void populatePhysical()
-    {
-        throw new System.NotImplementedException();
-    }
-
     // Update is called once per frame
 	void Update () {
 	

@@ -5,7 +5,7 @@ using System.Collections;
 [RequireComponent(typeof(CircleCollider2D))]
 public class Wand : MonoBehaviour
 {
-
+    public SomaticComponent Somatic;
     private Vector3 screenPoint;
     private Vector3 offset;
 
@@ -51,7 +51,9 @@ public class Wand : MonoBehaviour
             UnityEditor.EditorApplication.isPlaying = false;
         }*/
         var navigator = FindObjectOfType<Navigator>();
-        navigator.Navigate("Results");
+        Somatic.ErrorCount = Errors;
+        PlayerProgress.Instance.InProgressSpell.AddSomaticComponent(Somatic);
+        navigator.Navigate("LessonStatus");
     }
 
 	
