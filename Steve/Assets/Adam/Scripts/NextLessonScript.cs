@@ -50,10 +50,10 @@ public class NextLessonScript : MonoBehaviour
         switch (type)
         {
             case Spell.SpellType.Wand:
-                return "Somehow, you have managed to create a wand.";
+                return "Somehow, you have managed to create a wand. For your next task, you will create a simple potion of binding. Find a liquid and something stringy.";
 
             case Spell.SpellType.Potion:
-                return "Err... I guess that would work. You drink it first.";
+                return "Err... I guess that would work. You drink it first. Next, I'll have you summon a simple pet. Find something tasty for them and a crystal.";
 
                 case Spell.SpellType.Summon:
                 return "Still alive? You are not a total failure after all!";

@@ -27,9 +27,5 @@ public class Navigator : MonoBehaviour {
     public void Quit()
     {
         Application.Quit();
-        if (UnityEditor.EditorApplication.isPlaying)
-        {
-            UnityEditor.EditorApplication.isPlaying = false;
-        }
     }
 }
