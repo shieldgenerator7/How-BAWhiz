@@ -13,7 +13,7 @@ public class ItemCrafter : MonoBehaviour {
 	// Update is called once per frame
 	void Update() { 
 	}
-    public void craftItem(ArrayList items, GameObject baseItem)
+    public void craftItem(ArrayList items, GameObject baseItem, GameObject catalyst)
     {
         GameObject result = null;
         //foreach(GameObject item in items)
@@ -52,10 +52,8 @@ public class ItemCrafter : MonoBehaviour {
         {
             result.transform.position = ((GameObject)items[0]).transform.position;
         }
-        foreach (GameObject item in items)
-        {
-            GameObject.Destroy(item);
-        }
+        GameObject.Destroy(baseItem);
+        GameObject.Destroy(catalyst);
 
     }
 }

@@ -26,7 +26,7 @@ public class CupBoardController : MonoBehaviour {
                 //GetComponent<SpriteRenderer>().flipX = ! GetComponent<SpriteRenderer>().flipX;
                 open = ! open;
                 animator.SetBool("Open", open);
-                Debug.Log(animator.GetBool("Open"));
+                //Debug.Log(animator.GetBool("Open"));
                 //Debug.Log(animator.stat);
                 GetComponent<Rigidbody2D>().gravityScale = 1;
                 GetComponent<Rigidbody2D>().angularVelocity += rotation;

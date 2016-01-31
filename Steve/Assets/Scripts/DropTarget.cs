@@ -52,55 +52,92 @@ public class DropTarget : MonoBehaviour {
     }
     private void checkItems()
     {
-        bool fulfill1 = false;
-        GameObject item1 = null;
-        if (itemRequirement1 != null)
+        if (items.Count >= 2)
         {
-            foreach (GameObject item in items)
+            bool fulfill1 = false;
+            GameObject item1 = null;
+            if (itemRequirement1 != null)
             {
-                if (item.tag.Equals(itemRequirement1))
+                foreach (GameObject item in items)
                 {
-                    fulfill1 = true;
-                    item1 = item;
-                    break;//as long as one fulfills it, it's a go
+                    if (item.tag.Equals(itemRequirement1))
+                    {
+                        fulfill1 = true;
+                        item1 = item;
+                        break;//as long as one fulfills it, it's a go
+                    }
                 }
             }
-        }
-        else
-        {
-            fulfill1 = true;
-        }
-
-        bool fulfill2 = false;
-        if (itemRequirement2 != null)
-        {
-            foreach (GameObject item in items)
+            else
             {
-                if (item.tag.Equals(itemRequirement2))
+                fulfill1 = true;
+            }
+
+            bool fulfill2 = false;
+            GameObject item2 = null;
+            if (itemRequirement2 != null)
+            {
+                foreach (GameObject item in items)
                 {
-                    fulfill2 = true;
-                    break;//as long as one fulfills it, it's a go
+                    if (item.tag.Equals(itemRequirement2))
+                    {
+                        fulfill2 = true;
+                        item2 = item;
+                        break;//as long as one fulfills it, it's a go
+                    }
                 }
             }
-        }
-        else
-        {
-            fulfill2 = true;
-        }
+            else
+            {
+                fulfill2 = true;
+            }
 
-        if (fulfill1 && fulfill2)
+            if (fulfill1 && fulfill2)
+            {
+                craftObject(item1, item2);
+            }
+            else
+            {
+                craftingFailed();
+            }
+        }
+        else if (itemRequirement2.Equals("self"))//is this drop target a pet
         {
-            craftObject(item1);
+            GameObject item = (GameObject)items[0];
+            if (item.tag.Equals("item_potion"))
+            {
+                GameObject.Destroy(item);
+                GameObject.FindGameObjectWithTag("popup_smiley").GetComponent<PopUpDisplayer>().popup(this.gameObject);
+            }
+            else
+            {
+                item.GetComponent<ItemManipulator>().eject();
+            }
         }
 
     }
-    private void craftObject(GameObject item)
+    private void craftObject(GameObject item, GameObject catalyst)
     {
-        GetComponent<ItemCrafter>().craftItem(items, item);
+        GetComponent<ItemCrafter>().craftItem(items, item, catalyst);
         items = new ArrayList();
     }
-    public bool collides(Vector2 pos)
+    private void craftingFailed()
     {
+        //for(int i = items.Count - 1; i >= 0; i--) 
+        //{
+        //while (items.Count > 0)
+        //{
+        //   // ((GameObject)items[0]).GetComponent<ItemManipulator>().eject();
+        //}
+        //}
+        GameObject.FindGameObjectWithTag("popup_noreaction").GetComponent<PopUpDisplayer>().popup(this.gameObject);
+    }
+    public bool collides(GameObject item, Vector2 pos)
+    {
+        if (item.Equals(this.gameObject))
+        {
+            return false;
+        }
         Bounds bounds;
         if (sr != null)
         {

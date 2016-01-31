@@ -23,11 +23,11 @@ public class DropTargetListKeeper : MonoBehaviour {
     {
         places.Remove(place);
     }
-    public GameObject canDropHere(Vector2 pos)
+    public GameObject canDropHere(GameObject item, Vector2 pos)
     {
         foreach (GameObject place in places)
         {
-            if (place.GetComponent<DropTarget>().collides(pos))
+            if (place.GetComponent<DropTarget>().collides(item, pos))
             {
                 return place;
             }

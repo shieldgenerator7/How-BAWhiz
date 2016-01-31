@@ -28,12 +28,12 @@ public class InventoryManager : MonoBehaviour {
         {
             items.Add(item);
         }
-        Bounds bounds = spriteRer.bounds;
-        float posx = nextX;
-        float posy = transform.position.y;
-        item.transform.position = new Vector3(posx, posy);
+        //Bounds bounds = spriteRer.bounds;
+        //float posx = nextX;
+        //float posy = transform.position.y;
+        //item.transform.position = new Vector3(posx, posy);
         SpriteRenderer itemRenderer = item.GetComponent<SpriteRenderer>();
-        nextX += buffer + (itemRenderer.bounds.extents.x * 2);
+        //nextX += buffer + (itemRenderer.bounds.extents.x * 2);
         itemRenderer.sortingLayerName = "inUI";
         organizeItems();
     }

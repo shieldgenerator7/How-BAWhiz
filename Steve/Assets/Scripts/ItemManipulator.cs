@@ -20,6 +20,11 @@ public class ItemManipulator : MonoBehaviour {
             ItemSpawner spawnList = GameObject.FindGameObjectWithTag("SpawnPointList").GetComponent<ItemSpawner>();
             location = spawnList.getRandomLocation();
             transform.position = location.transform.position;
+            DropTarget dt = location.GetComponent<DropTarget>();
+            if (dt != null)
+            {
+                dt.accept(this.gameObject);
+            }
         }
 	}
 	
@@ -48,39 +53,41 @@ public class ItemManipulator : MonoBehaviour {
         }
         else if (Input.GetMouseButtonUp(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended))
         {
-            if ( ! alwaysInHand) { 
-            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                if (collides(this.gameObject, mousePosition))
+            if (!alwaysInHand)
+            {
+                Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                //    if (collides(this.gameObject, mousePosition))
+                //    {
+                if (inHand)
                 {
-                    if (inHand)
+                    if (Vector2.Distance(origMousePosition, mousePosition) < 0.5f)
                     {
-                        if (Vector2.Distance(origMousePosition, mousePosition) < 0.5f)
+                        inHand = false;
+                        detach();
+                        inventoryBox.GetComponent<InventoryManager>().addItem(this.gameObject);
+                        inInventory = true;
+                    }
+                    else {
+                        GameObject target = inventoryBox.GetComponent<InventoryManager>().dropList.GetComponent<DropTargetListKeeper>().canDropHere(this.gameObject,mousePosition);
+                        Debug.Log("target: " + target);
+                        if (target != null)
                         {
-                            inHand = false;
                             detach();
+                            target.GetComponent<DropTarget>().accept(this.gameObject);
+                            location = target;
+                            inHand = false;
+                            inInventory = false;
+                            inventoryBox.GetComponent<InventoryManager>().removeItem(this.gameObject);
+                        }
+                        else
+                        {
+                            detach();
+                            inHand = false;
                             inventoryBox.GetComponent<InventoryManager>().addItem(this.gameObject);
                             inInventory = true;
                         }
-                        else {
-                            GameObject target = inventoryBox.GetComponent<InventoryManager>().dropList.GetComponent<DropTargetListKeeper>().canDropHere(mousePosition);
-                            if (target != null)
-                            {
-                                detach();
-                                target.GetComponent<DropTarget>().accept(this.gameObject);
-                                location = target;
-                                inHand = false;
-                                inInventory = false;
-                                inventoryBox.GetComponent<InventoryManager>().removeItem(this.gameObject);
-                            }
-                            else
-                            {
-                                detach();
-                                inHand = false;
-                                inventoryBox.GetComponent<InventoryManager>().addItem(this.gameObject);
-                                inInventory = true;
-                            }
-                        }
                     }
+                    //}
                 }
                 //GetComponent<SpriteRenderer>().flipX = ! GetComponent<SpriteRenderer>().flipX;
                 //open = !open;
@@ -118,7 +125,23 @@ public class ItemManipulator : MonoBehaviour {
             {
                 dt.removeItem(this.gameObject);
             }
+            InventoryManager im = location.GetComponent<InventoryManager>();
+            if (im != null)
+            {
+                im.removeItem(this.gameObject);
+            }
         }
+    }
+
+    /**
+    * Called when a drop target throws this item out
+    */
+    public void eject()
+    {
+        inHand = false;
+        detach();
+        inventoryBox.GetComponent<InventoryManager>().addItem(this.gameObject);
+        inInventory = true;
     }
 
     public static bool collides(GameObject go, Vector2 pos)
