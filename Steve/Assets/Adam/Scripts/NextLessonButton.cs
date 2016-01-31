@@ -35,6 +35,10 @@ public class NextLessonButton : MonoBehaviour {
                     PlayerProgress.Instance.InProgressSpell = new Spell();
                     PlayerProgress.Instance.InProgressSpell.Type = (Spell.SpellType) ((int) completedSpell + 1);
                 }
+                else
+                {
+                    levelToLoad = "Final";
+                }
                 break;
 
         }

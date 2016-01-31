@@ -44,8 +44,7 @@ public class Wand : MonoBehaviour
     public void End()
     {
         Debug.Log(String.Format("Errors: {0}", Errors));
-        Time.timeScale = 0;
-        Application.Quit();
+        
         /*if (UnityEditor.EditorApplication.isPlaying)
         {
             UnityEditor.EditorApplication.isPlaying = false;

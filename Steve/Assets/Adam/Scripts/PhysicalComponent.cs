@@ -20,9 +20,10 @@ public class PhysicalComponent : MonoBehaviour
 
     public void activateNextScene()
     {
+        this.gameObject.transform.SetParent(null);
         DontDestroyOnLoad(this);
-        PlayerProgress.Instance.CompletePhysical(GetComponent<PhysicalComponent>());
-        GameObject.FindGameObjectWithTag("SceneContainer").SetActive(false);
-        SceneManager.LoadScene("LessonStatus", LoadSceneMode.Additive);
+        PlayerProgress.Instance.CompletePhysical(this);
+        //GameObject.FindGameObjectWithTag("SceneContainer").SetActive(false);
+        SceneManager.LoadScene("LessonStatus");
     }
 }

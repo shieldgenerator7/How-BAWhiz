@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
 	{
 	    TargetSpawns = GetComponentsInChildren<TargetSpawn>().ToList();
 	    HazardSpawns = GetComponentsInChildren<HazardSpawn>().ToList();
+
+        StartButton.SetActive(true);
 	}
 	
 	// Update is called once per frame
