@@ -3,6 +3,8 @@ using System.Collections;
 
 public class TextLoader : MonoBehaviour {
 
+    public string filePath;
+
     class DialogueLine
     {
         public string speaker;
@@ -27,7 +29,7 @@ public class TextLoader : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        string textStream = System.IO.File.ReadAllText("Assets\\Wes Stuff\\Documents\\Intro Dialogue.txt");
+        string textStream = System.IO.File.ReadAllText(filePath);
         string[] lines = textStream.Split('\n');
         foreach(string line in lines)
         {
@@ -59,7 +61,8 @@ public class TextLoader : MonoBehaviour {
         Debug.Log(currentIndex);
         if (currentIndex >= dialogueLines.Count)
         {
-            currentIndex--;
+            return null;
+            //currentIndex = dialogueLines.Count-1;
         }
         return ((DialogueLine)dialogueLines[currentIndex]).getQuote();
     }

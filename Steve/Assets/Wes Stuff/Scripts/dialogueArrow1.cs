@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using UnityEngine.SceneManagement;
 
 public class dialogueArrow1 : MonoBehaviour {
 
@@ -30,7 +31,12 @@ public class dialogueArrow1 : MonoBehaviour {
 
     private void updateText()
     {
-        uiText.text = textLoader.getNextLine();
+        string text0 = textLoader.getNextLine();
+        if (text0 == null)
+        {
+            SceneManager.LoadScene("cupboard");
+        }
+        uiText.text = text0;
         string speaker = textLoader.getSpeaker();
         if (speaker != null && ! speaker.Equals(""))
         {
