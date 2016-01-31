@@ -47,6 +47,7 @@ public class ItemCrafter : MonoBehaviour {
             result.transform.position = new Vector3(0, 0);
             result.GetComponent<ItemManipulator>().alwaysInHand = true;
             Cursor.visible = false;
+            result.GetComponent<PhysicalComponent>().activateNextScene();
         }
         else
         {
