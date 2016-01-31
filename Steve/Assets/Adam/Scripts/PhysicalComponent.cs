@@ -21,6 +21,6 @@ public class PhysicalComponent : MonoBehaviour
     {
         DontDestroyOnLoad(this);
         PlayerProgress.Instance.CompletePhysical(GetComponent<PhysicalComponent>());
-        SceneManager.LoadScene("LessonStatus");
+        SceneManager.LoadScene("LessonStatus", LoadSceneMode.Additive);
     }
 }
