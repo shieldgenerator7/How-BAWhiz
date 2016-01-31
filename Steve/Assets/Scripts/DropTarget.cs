@@ -53,6 +53,7 @@ public class DropTarget : MonoBehaviour {
     private void checkItems()
     {
         bool fulfill1 = false;
+        GameObject item1 = null;
         if (itemRequirement1 != null)
         {
             foreach (GameObject item in items)
@@ -60,6 +61,7 @@ public class DropTarget : MonoBehaviour {
                 if (item.tag.Equals(itemRequirement1))
                 {
                     fulfill1 = true;
+                    item1 = item;
                     break;//as long as one fulfills it, it's a go
                 }
             }
@@ -88,13 +90,13 @@ public class DropTarget : MonoBehaviour {
 
         if (fulfill1 && fulfill2)
         {
-            craftObject();
+            craftObject(item1);
         }
 
     }
-    private void craftObject()
+    private void craftObject(GameObject item)
     {
-        GetComponent<ItemCrafter>().craftItem(items);
+        GetComponent<ItemCrafter>().craftItem(items, item);
         items = new ArrayList();
     }
     public bool collides(Vector2 pos)

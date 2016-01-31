@@ -47,9 +47,9 @@ public class InventoryManager : MonoBehaviour {
     public void organizeItems()
     {
         float width = spriteRer.bounds.extents.x * 2;
-        float collectiveWidth = 0;
+        float collectiveWidth = width+1;
         int limiter = 0;
-        do
+        while (collectiveWidth > width)
         {
             collectiveWidth = 0;
             int i = 0;
@@ -67,12 +67,11 @@ public class InventoryManager : MonoBehaviour {
                 limiter++;
             }
         }
-        while (collectiveWidth > width);
 
         float buffer = (width - collectiveWidth) / (items.Count - limiter + 1);
-        if (buffer > 1)
+        if (buffer > 0.5f)
         {
-            buffer = 1;
+            buffer = 0.5f;
         }
 
         Bounds bounds = spriteRer.bounds;
@@ -85,8 +84,18 @@ public class InventoryManager : MonoBehaviour {
             if (j >= limiter)
             {
                 SpriteRenderer itemRenderer = item.GetComponent<SpriteRenderer>();
-                item.transform.position = new Vector3(nextX, posy);
+                Bounds b2 = itemRenderer.bounds;
+                posy = transform.position.y - (((b2.max.y+b2.min.y)/2)-item.transform.position.y);
+                //Debug.Log("==ITEM"+item);
+                //Debug.Log(posy);
+                //Debug.Log((((b2.max.y - b2.min.y) / 2) - item.transform.position.y));
+                float posx = nextX + (item.transform.position.x - b2.min.x);
+                item.transform.position = new Vector3(posx, posy);
                 nextX += buffer + (itemRenderer.bounds.extents.x * 2);
+            }
+            else
+            {
+                item.transform.position = new Vector3(100, 100);
             }
         }
 

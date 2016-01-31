@@ -13,23 +13,45 @@ public class ItemCrafter : MonoBehaviour {
 	// Update is called once per frame
 	void Update() { 
 	}
-    public void craftItem(ArrayList items)
+    public void craftItem(ArrayList items, GameObject baseItem)
     {
         GameObject result = null;
-        foreach(GameObject item in items)
+        //foreach(GameObject item in items)
+        //{
+        ItemManipulator im = baseItem.GetComponent<ItemManipulator>();
+        if (im != null)
         {
-            ItemManipulator im = item.GetComponent<ItemManipulator>();
-            if (im != null)
+            if (im.upgradeObject != null)
             {
-                if (im.upgradeObject != null)
+                result = im.upgradeObject;
+            }
+            else
+            {
+                foreach (GameObject item in items)
                 {
-                    result = im.upgradeObject;
-                    break;
+                    im = item.GetComponent<ItemManipulator>();
+                    if (im != null)
+                    {
+                        if (im.upgradeObject != null)
+                        {
+                            result = im.upgradeObject;
+                            break;
+                        }
+                    }
                 }
             }
         }
-        result.transform.position = new Vector3(0, 0);
-        result.GetComponent<ItemManipulator>().alwaysInHand = true;
+        //}
+        if (result.tag.Equals("item_wand"))
+        {
+            result.transform.position = new Vector3(0, 0);
+            result.GetComponent<ItemManipulator>().alwaysInHand = true;
+            Cursor.visible = false;
+        }
+        else
+        {
+            result.transform.position = ((GameObject)items[0]).transform.position;
+        }
         foreach (GameObject item in items)
         {
             GameObject.Destroy(item);
