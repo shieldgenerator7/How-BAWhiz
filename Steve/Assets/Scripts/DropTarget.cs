@@ -7,6 +7,7 @@ public class DropTarget : MonoBehaviour {
     public bool isDropTarget = true;
     public string itemRequirement1;
     public string itemRequirement2;
+    public Spell.SpellType spellType;
 
     ArrayList items = new ArrayList();
 
@@ -118,7 +119,7 @@ public class DropTarget : MonoBehaviour {
     }
     private void craftObject(GameObject item, GameObject catalyst)
     {
-        GetComponent<ItemCrafter>().craftItem(items, item, catalyst);
+        GetComponent<ItemCrafter>().craftItem(items, item, catalyst,spellType==PlayerProgress.Instance.InProgressSpell.Type);
         items = new ArrayList();
     }
     private void craftingFailed()

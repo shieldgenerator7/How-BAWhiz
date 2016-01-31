@@ -8,19 +8,21 @@ public class PhysicalComponent : MonoBehaviour
 
     void Start()
     {
-        var prefab = Create();
-        prefab.transform.position = transform.position;
+        //var prefab = //Create();
+        //prefab.transform.position = transform.position;
+        
     }
 
-    public GameObject Create()
-    {
-        return Instantiate(Prefab);
-    }
+    //public GameObject Create()
+    //{
+    //    return Instantiate(Prefab);
+    //}
 
-    void OnMouseDown()
+    public void activateNextScene()
     {
         DontDestroyOnLoad(this);
         PlayerProgress.Instance.CompletePhysical(GetComponent<PhysicalComponent>());
+        GameObject.FindGameObjectWithTag("SceneContainer").SetActive(false);
         SceneManager.LoadScene("LessonStatus", LoadSceneMode.Additive);
     }
 }

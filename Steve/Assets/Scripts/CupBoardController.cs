@@ -46,4 +46,11 @@ public class CupBoardController : MonoBehaviour {
         }
         return false;
     }
+    void OnLevelWasLoaded(int level)
+    {
+        if (level == 2)
+        {
+            GameObject.FindGameObjectWithTag("SceneContainer").SetActive(true);
+        }
+    }
 }

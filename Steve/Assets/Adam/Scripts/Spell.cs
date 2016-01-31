@@ -55,7 +55,13 @@ public class Spell
         }
     }
 
-    public SpellType Type { get; set; }
+    private SpellType _Type = SpellType.Wand;
+
+    public SpellType Type
+    {
+        get { return _Type; }
+        set { _Type = value; }
+    }
 
     public void AddPhysicalComponent(PhysicalComponent phys)
     {
